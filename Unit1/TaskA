@@ -1,0 +1,31 @@
+/* Programming assignment 1, task A
+
+Description of program or class:
+This modifies the given program to ask a user to enter a word. The program then 
+displays the word, the first letter of the word, and the last letter of the word.
+
+Author: Mackenzie Branch    
+Date: 9/20/18
+ */
+
+
+import java.util.Scanner;
+
+
+public class TaskA {
+    
+    public static void main(String[ ] args) {
+        System.out.print("Enter a word: ");
+        // declare Scanner objects that accept standard input
+        // https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
+        Scanner so = new Scanner(System.in);
+        String word = so.nextLine();
+        String[] chars = word.split("");
+        
+        String lastLetter = chars[chars.length-1]; //determine the last letter in the word
+        
+        System.out.println("The word entered is: " + word);
+        System.out.println("The first letter is: " + chars[0]);
+        System.out.println("The last letter is: " + lastLetter);
+    }
+}
