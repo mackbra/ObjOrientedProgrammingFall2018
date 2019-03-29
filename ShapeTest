@@ -1,0 +1,161 @@
+
+/*Mackenzie Branch
+ * Fa18 CSCI 2001-91
+ * 10/4/18
+ *10.4- polymorphism allows programming in general. This means that methods
+ *declared in super classes can be inherited by sub classes, but then changed
+ *in the subclass according to how they want to use it without having to overhaul
+ *the superclass. For example, the getArea methods is used in all of the different
+ *subclasses, and changed according to how you would get an area for each
+ *different shape. 
+ *10.8- Abstract classes can extend other classes and implement multiple interfaces
+ *while an interface can only implement an interface. All members of an interface
+ *are public, whereas abstract classes can define a number of different members.
+ *Both abstract classes and interfaces are implemented/extended when there is a
+ *IS-A relationship. Classes that extend an abstract class should have multiple 
+ *of common methods and fields, or if they need to use modifiers which are not
+ *declared public. Classes can extend only abstract class, but they can inherit
+ *multiple interfaces.
+ *10.9- A class HAS to implement the methods in an interface, otherwhise it has to
+ *be abstract. If you are adding on to an interface that already exists and is being
+ *implemented by multiple classes, adding "default" on to each method would keep
+ *you from running into programming errors, or forcing you to declare those classes
+ *as abstract classes.
+ *10.10 - A functional interface is an interface that only contains one abstract
+ *method, such as the interface ShapeTraits.
+ *10.11 - static methods are useful so that you don't need to be declaring the same
+ *thing in every class that implements the interface. 
+ *10.12 - A private method can only be called by the class that it is in. It cuts
+ *down on duplicate code, and it keeps the code from being unintentionally accessed
+ */
+import java.lang.*;
+
+//creating the super class, Shape
+abstract class Shape{}
+
+public interface ShapeTraits{
+    double getArea();
+}
+//creating the super class TwoDimensionalShape, which is a sub class of shape
+abstract class TwoDimensionalShape extends Shape implements ShapeTraits {
+
+    public String toString(){
+        return String.format("Area %.2f", getArea());
+    }
+    //creating sub class Circle, which calculates the area of a circle
+    class Circle extends TwoDimensionalShape {
+        private double r;
+
+        public Circle (double r){
+            this.r = r;
+        }
+
+        @Override
+        public double getArea(){
+            return (this.r * this.r * Math.PI);
+        }  
+    }
+
+    //sub class Square calculates the area of a square
+    class Square extends TwoDimensionalShape {
+        private double a;
+
+        public Square (double l){
+            this.a = a;
+        }
+
+        @Override
+        public double getArea(){
+            return a*a;
+        }
+    }
+
+    //subclass Triangle calculates the area of a triangle
+    class Triangle extends TwoDimensionalShape {
+        private double l;
+        private double h;
+
+        public Triangle(double l, double h){
+            this.l= l;
+            this.h = h;
+        }
+
+        @Override
+        public double getArea(){
+
+            return (l*h)/2;
+        }
+    }
+}
+
+//creating the super class ThreeDimensionalShape, which is a sub class of Shape
+abstract class ThreeDimensionalShape extends Shape implements ShapeTraits{
+
+    public double getVolume(){
+        return 0.0;
+    }
+
+    public String toString(){
+        return String.format("Area %.2f", "Volume %.2f", getArea(), getVolume());
+    }
+
+    //sub class Sphere calculates the surface area and the volume of a sphere
+    class Sphere extends ThreeDimensionalShape{
+        private double r;
+
+        public Sphere(double r){
+            this.r = r;
+        }
+
+        @Override
+        public double getArea(){
+            return Math.PI * 4 * r * r;
+        }
+
+        @Override
+        public double getVolume(){
+            return Math.PI * (4/3) * r * r *r;
+        }
+    }
+
+    //sub class Cube calculates the surface area and volume of a cube
+    class Cube extends ThreeDimensionalShape{
+        private double a;
+
+        public Cube(double a){
+            this.a = a;
+        }
+
+        @Override
+        public double getArea(){
+            return 6 * a * a;
+        }
+
+        @Override
+        public double getVolume(){
+            return a * a * a;
+        }
+    }
+
+    //sub class Tetrahedron calculates the surface area and volume of a tetrahedron
+    class Tetrahedron extends ThreeDimensionalShape{
+        private double l;
+
+        public Tetrahedron(double l){
+            this.l = l;
+        }
+
+        @Override
+        public double getArea(){
+            return Math.sqrt(3) * l * l;
+        }
+
+        @Override
+        public double getVolume(){
+            return (l * l * l)/(Math.sqrt(2) * 6);
+        }
+
+    }
+
+}
+
