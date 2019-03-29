@@ -1,0 +1,56 @@
+/* Programming assignment 1, task C
+Program or Class Name: 
+
+Description of program or class:
+Compares the frequency of the letters from the second word to the first word.
+
+Author: Mackenzie Branch
+Date: 9/20/18
+ */
+
+import java.util.Scanner;
+public class TaskC {
+
+    public static void main(String[ ] args) {
+        System.out.print("Enter a word: ");
+        // declare Scanner objects that accept standard input
+        // https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
+        Scanner so = new Scanner(System.in);
+        String word = so.nextLine();
+        String[] chars = word.split("");
+
+        System.out.print("Enter a second word: ");
+        Scanner so2 = new Scanner(System.in);
+        String word2 = so.nextLine();
+        String[] chars2 = word2.split("");
+
+        System.out.println("The word entered is: " + word);
+        System.out.println("The word entered is: " + word2);
+
+        int [] number = new int [chars.length];
+        int [] number2 = new int [chars2.length];
+
+    }
+
+    private void printHistogram() {
+
+        for (String [] array : String [] array2); 
+
+        for (int range = 0; range < array.length; range++) {
+
+            System.out.print(array[range] + " : ");
+        }
+
+        for (int stars = 0; stars < array[range]; stars ++){
+            System.out.println();
+        }
+    }
+
+    private String convertToStars(String [] array2) {
+        StringBuilder builder = new StringBuilder();
+        for (int j = 0; j < array2.length; j++) {
+            builder.append('*');
+        }
+        return builder.toString();
+    }
+}
