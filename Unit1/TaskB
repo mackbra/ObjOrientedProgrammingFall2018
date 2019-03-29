@@ -1,0 +1,161 @@
+/* Programming assignment 1, task B
+Program or Class Name: Chapter7, TaskB
+
+Description of program or class:
+1. Converts each character of the entered word into an array of Unicode decimal numbers
+2. Determines if the input word is a palindrome – the same frontwards and backwards.
+3. Sorts the Unicode character array according to their Unicode decimal values.
+4. Computes word statistics: max, min, sum and average of the Unicode values of the characters in the
+entered word.
+
+Author: Mackenzie Branch
+Date: 9/20/18
+ */
+
+import java.util.*;
+
+public class TaskB {
+
+    public static void main(String[ ] args) {
+        System.out.print("Enter a word: ");
+        // declare Scanner objects that accept standard input
+        // https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
+        Scanner so = new Scanner(System.in);
+        String word = so.nextLine();
+        String[] chars = word.split("");
+
+        System.out.println("The word entered is: " + word);
+
+        int [] uniCode = new int [chars.length];
+        
+        //1. Convert letters to Unicode
+        toUni(word, chars, uniCode);
+        
+        //2. Test to see if it is a palindrome
+        if (palindromeTest(word) == true){
+            System.out.println("This word is a palindrome");
+        }
+        else
+            System.out.println("This word is NOT a palindrome");
+        
+            
+        //3. Rearrange the numbers of an array into descending order
+        BubbleSort(uniCode);
+        
+        
+        //4. Compute min, max, sum, and average of word value
+        System.out.println("Those numbers arranged in order are: " + uniCode);
+
+        System.out.println("The smallest of those numbers is: " + findMin(uniCode));
+
+        System.out.println("The largest of those numbers is: " + findMax(uniCode));
+
+        System.out.println("The sum of those numbers is: " + findSum(uniCode));
+
+        System.out.println("The average of those numbers is: " + findAvg(uniCode));
+    }
+    
+    //a method to display letters in their unicode value
+    public static void toUni(String str, String [] array, int [] integers) {
+        for(int i = 0; i < array.length; i++){
+
+            char c = str.charAt(i);
+            int code  = (int) c;
+            integers[i] = code;
+
+            System.out.println("The letter " + array[i] +" in ASCII is: " + integers[i]);
+        }
+    }
+
+    //a method which tests a word to see if it is a palindrome
+    public static boolean palindromeTest(String str) {    
+
+        int n = str.length();
+
+        for( int i = 0; i < n/2; i++ )
+            if (str.charAt(i) != str.charAt(n-i-1)) return false;
+
+        return true;    
+    }
+    
+    //a method to arrange the the Unicode values of the letters in descending order
+    public static void BubbleSort( int [ ] num ){
+        int j;
+        boolean flag = true;   // set flag to true to begin first pass
+        int temp;   //holding variable
+
+        while ( flag )
+        {
+            flag= false;    //set flag to false awaiting a possible swap
+            for( j=0;  j < num.length -1;  j++ )
+            {
+                if ( num[ j ] < num[j+1] )   // change to > for ascending sort
+                {
+                    temp = num[ j ];                //swap elements
+                    num[ j ] = num[ j+1 ];
+                    num[ j+1 ] = temp;
+                    flag = true;              //shows a swap occurred  
+                } 
+            } 
+        } 
+
+    } 
+    
+    //a method to calculate the minimum value of an array
+    public static int findMin(int array []){
+        int minValue = array[0];
+
+        for (int i = 0;  i < array.length; i++){
+            if (array[i] > i){
+
+                minValue = array[i];
+            }
+
+        }
+
+        return minValue;
+    }
+
+    //a method to calculate the maximum value of an array
+    public static int findMax(int array []){
+        int maxValue = array[0];
+
+        for (int i = 0; i< array.length; i++){
+            if (array[i] < i){
+
+                maxValue = array[i];
+            }
+        }
+
+        return maxValue;
+
+    }
+
+    //a method to calculate the total of all the values in an array
+    public static int findSum(int array []){
+        int sum = 0;
+
+        for (int i = 0; i < array.length; i++){
+
+            sum += array[i];
+        }
+        return sum;
+
+    }
+
+    //a method to calculate the average of all the values in an array
+    public static double findAvg(int array []){
+        double sum = 0;
+
+        for (int i = 0; i < array.length; i++){
+
+            sum += array[i];
+        }
+
+        double avg = sum/array.length;
+
+        return avg;
+
+    }
+
+}
