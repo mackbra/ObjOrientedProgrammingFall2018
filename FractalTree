@@ -1,0 +1,56 @@
+//Mackenzie Branch
+//11-15-18
+//Programming Assignment 5: Recursion
+//This program creates a fractal tree, but with a twist
+//Original code: https://rosettacode.org/wiki/Fractal_tree#Java
+
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
+public class FractalTree extends JFrame {
+
+    public FractalTree() {
+        super("Fractal Tree");
+        //sets the size of JFrame
+        setBounds(100, 100, 800, 700);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private void drawTree(Graphics g, int x1, int y1, double angle, double depth) {
+
+        //depth is how tall the lines will be
+        //if depth equals 0, stop running the program (avoids an infinte loop)
+        if (depth == 0) return;
+        
+        
+        //As long as depth has a positive value, draw a line based on these calculations
+        int x2 = x1 + (int) (Math.cos(Math.toRadians(angle)) * depth * 10.0);
+        int y2 = y1 + (int) (Math.sin(Math.toRadians(angle)) * depth * 10.0);
+        //Code for the first line
+        g.drawLine(x1, y1, x2, y2);
+        
+        //The angle is modified to be multiplied by .75 during each iteration- this is what causes it ot lean.
+        //If it were a negative number, it would lean to the left
+        //The depth decreases in small increments, meaning the program will run longer and create a more intricate design
+        drawTree(g, x2, y2, ((angle - 20) * .75), depth - .5);
+        
+        //two lines of code, one for each "branch" that is branching off from the parent line
+        drawTree(g, x2, y2, ((angle + 20) * .75), depth - .5);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        
+        //The original line is the following coordinates.
+        //The original coordinates are plugged into the drawTree method
+        //and then the calculations for the new lines are made based on these
+        g.setColor(Color.black);
+        drawTree(g, 200, 650, -90, 8);
+    }
+
+    public static void main(String[] args) {
+        new FractalTree().setVisible(true);
+    }
+}
